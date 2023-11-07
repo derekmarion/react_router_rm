@@ -10,11 +10,12 @@ import Button from 'react-bootstrap/Button';
 function CharactersPage() {
     const [characters, setCharacters] = useState([]);
     const { favorites, setFavorites } = useOutletContext();
+    const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
 
     useEffect(() => {
-        getCharacters();
-    }, []);
+        getCharacters(currentPage);
+    }, [currentPage]);
 
     const handleButtonClick = (id) => {
         navigate(`/characterdetails/${id}/`);
@@ -28,14 +29,18 @@ function CharactersPage() {
         }
     }
 
-    //get all characters on first page of character GET. Note that each return has a reference to next page in info.next
-    const getCharacters = async () => {
-    try {
-        const response = await axios.get("https://rickandmortyapi.com/api/character");
-        setCharacters(response.data.results);
-    } catch (error) {
-        console.error("An error occured:", error);
+    //get specific character page
+    const getCharacters = async (page) => {
+        try {
+            const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`);
+            setCharacters(response.data.results);
+        } catch (error) {
+            console.error("An error occured:", error);
+        }
     }
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
     }
 
     return (
@@ -62,6 +67,10 @@ function CharactersPage() {
             </Col>
         ))}
         </Row>
+        </div>
+        <div className="fixed-bottom bg-transparent p-3 text-center d-flex justify-content-between">
+            <Button disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</Button>
+            <Button disabled={currentPage === 42} onClick={() => handlePageChange(currentPage + 1)}>Next</Button>
         </div>
         </>
     )
