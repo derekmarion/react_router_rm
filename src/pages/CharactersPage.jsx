@@ -55,10 +55,10 @@ function CharactersPage() {
                 <Card.Body>
                     <Card.Title>{character.name}</Card.Title>
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Status: {character.status}</ListGroup.Item>
-                        <ListGroup.Item>Species: {character.species}</ListGroup.Item>
                         <ListGroup.Item>
                         <Button onClick={()=>handleButtonClick(character.id)}>More Details</Button>
+                        </ListGroup.Item>
+                        <ListGroup.Item>
                         <Button onClick={()=> addToFavorites(character)}>Favorite</Button>
                         </ListGroup.Item>
                     </ListGroup>

@@ -27,9 +27,12 @@ const Favorites = () => {
                 <Card.Body>
                     <Card.Title>{favorite.name}</Card.Title>
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Status: {favorite.status}</ListGroup.Item>
-                        <ListGroup.Item>Species: {favorite.species}</ListGroup.Item>
-                        <ListGroup.Item><Button onClick={()=> removeFromFavorites(favorite.id)}>Remove</Button></ListGroup.Item>
+                    <ListGroup.Item>
+                        <Button onClick={()=>handleButtonClick(character.id)}>More Details</Button>
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                        <Button onClick={()=> removeFromFavorites(favorite.id)}>Remove</Button>
+                    </ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
             </Card>
