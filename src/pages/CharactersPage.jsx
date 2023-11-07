@@ -20,6 +20,14 @@ function CharactersPage() {
         navigate(`/characterdetails/${id}/`);
     }
 
+    const addToFavorites = (character) => {
+        if (favorites.length < 4) {
+            setFavorites([...favorites, character]);
+        } else {
+            alert("You can't add more than 4 favorites.")
+        }
+    }
+
     //get all characters on first page of character GET. Note that each return has a reference to next page in info.next
     const getCharacters = async () => {
     try {
@@ -28,7 +36,8 @@ function CharactersPage() {
     } catch (error) {
         console.error("An error occured:", error);
     }
-};
+    }
+
     return (
         <>
            <div className="container text-center" style={{ marginTop: '70px' }}>
@@ -45,7 +54,7 @@ function CharactersPage() {
                         <ListGroup.Item>Species: {character.species}</ListGroup.Item>
                         <ListGroup.Item>
                         <Button onClick={()=>handleButtonClick(character.id)}>More Details</Button>
-                        <Button onClick={()=>setFavorites([...favorites, character])}>Favorite</Button>
+                        <Button onClick={()=> addToFavorites(character)}>Favorite</Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
