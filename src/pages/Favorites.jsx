@@ -1,6 +1,6 @@
 import { useEffect, useState} from "react";
 import Card from 'react-bootstrap/Card';
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -8,11 +8,16 @@ import Button from 'react-bootstrap/Button'
 
 const Favorites = () => {
     const { favorites, setFavorites } = useOutletContext();
+    const navigate = useNavigate();
 
     const removeFromFavorites = (id) => {
         // Filter out items with the specified id
         const updateFavorites = favorites.filter(favorite => favorite.id !== id);
         setFavorites(updateFavorites);
+    }
+
+    const handleButtonClick = (id) => {
+        navigate(`/characterdetails/${id}/`);
     }
 
     return (
@@ -28,7 +33,7 @@ const Favorites = () => {
                     <Card.Title>{favorite.name}</Card.Title>
                     <ListGroup variant="flush">
                     <ListGroup.Item>
-                        <Button onClick={()=>handleButtonClick(character.id)}>More Details</Button>
+                        <Button onClick={()=>handleButtonClick(favorite.id)}>More Details</Button>
                     </ListGroup.Item>
                     <ListGroup.Item>
                         <Button onClick={()=> removeFromFavorites(favorite.id)}>Remove</Button>
