@@ -4,13 +4,21 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useNavigate } from "react-router-dom";
+import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
+import Button from 'react-bootstrap/Button';
 
 function CharactersPage() {
     const [characters, setCharacters] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getCharacters();
     }, []);
+
+    const handleButtonClick = (id) => {
+        navigate(`/characterdetails/${id}/`);
+    }
 
     //get all characters on first page of character GET. Note that each return has a reference to next page in info.next
     const getCharacters = async () => {
@@ -35,6 +43,7 @@ function CharactersPage() {
                     <ListGroup variant="flush">
                         <ListGroup.Item>Status: {character.status}</ListGroup.Item>
                         <ListGroup.Item>Species: {character.species}</ListGroup.Item>
+                        <ListGroup.Item><Button onClick={()=>handleButtonClick(character.id)}>More Details</Button></ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
             </Card>
