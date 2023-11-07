@@ -15,6 +15,7 @@ function NavBar() {
             <Nav.Link as={Link} to="/" activeClassName="active" exact>Home</Nav.Link>
             <Nav.Link as={Link} to="/about" activeClassName="active">About</Nav.Link>
             <Nav.Link as={Link} to="/characters" activeClassName="active">Characters</Nav.Link>
+            <Nav.Link as={Link} to="/favorites" activeClassName="active">Favorites</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

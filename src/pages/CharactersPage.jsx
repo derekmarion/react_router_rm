@@ -1,15 +1,15 @@
-import React, { useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useNavigate } from "react-router-dom";
-import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 
 function CharactersPage() {
     const [characters, setCharacters] = useState([]);
+    const { favorites, setFavorites } = useOutletContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,7 +43,10 @@ function CharactersPage() {
                     <ListGroup variant="flush">
                         <ListGroup.Item>Status: {character.status}</ListGroup.Item>
                         <ListGroup.Item>Species: {character.species}</ListGroup.Item>
-                        <ListGroup.Item><Button onClick={()=>handleButtonClick(character.id)}>More Details</Button></ListGroup.Item>
+                        <ListGroup.Item>
+                        <Button onClick={()=>handleButtonClick(character.id)}>More Details</Button>
+                        <Button onClick={()=>setFavorites([...favorites, character])}>Favorite</Button>
+                        </ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
             </Card>
