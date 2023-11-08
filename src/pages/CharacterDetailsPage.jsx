@@ -3,10 +3,11 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
+import Spinner from "react-bootstrap/Spinner";
 
 const CharacterDetailsPage = () => {
     const { id } = useParams();
-    const [character, setCharacter] = useState({})
+    const [character, setCharacter] = useState(null)
 
     useEffect(() => {
         getCharacter();
@@ -24,13 +25,14 @@ const CharacterDetailsPage = () => {
 };
     return (
         <>
+        {character ? (
         <div className="container text-center" style={{ marginTop: '70px' }}>
-            <Card style={{ width: '18rem'}}>
+            <Card style={{ width: '18rem'}} className="mx-auto">
                 <Card.Img variant="top" src={character.image} />
                 <Card.Body>
                     <Card.Title>{character.name}</Card.Title>
                     <ListGroup variant="flush">
-                    <ListGroup.Item>
+                    <ListGroup.Item> {/*Add a spinner while this loads? */}
                         Status: {character.status}
                         <br />Species: {character.species}
                         <br />Origin: {character.origin ? character.origin.name : 'Unknown'}
@@ -39,7 +41,15 @@ const CharacterDetailsPage = () => {
                     </ListGroup>
                 </Card.Body>
             </Card>
+        </div> )
+        : (
+        <div className="container text-center" style={{ marginTop: '275px' }}>
+            <Spinner animation="border" role="status"> 
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
         </div>
+        )
+        }
         </>
     )
 }
