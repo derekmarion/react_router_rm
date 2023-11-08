@@ -11,7 +11,7 @@ const CharacterDetailsPage = () => {
 
     useEffect(() => {
         getCharacter();
-    }, []);
+    }, [id]);
 
     //API call to GET character with ID defined by param in URL
     const getCharacter = async () => {
