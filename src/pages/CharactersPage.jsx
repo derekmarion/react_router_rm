@@ -21,8 +21,11 @@ function CharactersPage() {
         navigate(`/characterdetails/${id}/`);
     }
 
-    const addToFavorites = (character) => {
-        if (favorites.length < 4) {
+    const addToFavorites = (character) => { //Note that asynchronous state updates here cause some undesirable behavior (e.g. favorite button will not update immediately)
+        if (favorites.some(fav => fav.id === character.id)) { 
+            const updateFavorites = favorites.filter(favorite => favorite.id !== character.id);
+            setFavorites(updateFavorites);
+        }else if (favorites.length < 4) {
             setFavorites([...favorites, character]);
         } else {
             alert("You can't add more than 4 favorites.")
@@ -59,7 +62,11 @@ function CharactersPage() {
                         <Button onClick={()=>handleButtonClick(character.id)}>More Details</Button>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                        <Button onClick={()=> addToFavorites(character)}>Favorite</Button>
+                        <Button onClick={()=> addToFavorites(character)} className={favorites.some(fav => fav.id === character.id) ? 'favorite-button' : 'remove-button'}>
+                            {favorites.some(fav => fav.id === character.id)
+                            ? "Remove"
+                            : "Favorite"}
+                            </Button>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card.Body>
