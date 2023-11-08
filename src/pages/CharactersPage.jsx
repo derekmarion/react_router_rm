@@ -53,7 +53,7 @@ function CharactersPage() {
         <Row xs={1} md={2} lg={3} xl={4} className="g-4">
         {characters.map(character => (
             <Col key={character.id}>
-            <Card style={{ width: '18rem'}}>
+            <Card className="char-card" style={{ width: '18rem'}}>
                 <Card.Img variant="top" src={character.image} />
                 <Card.Body>
                     <Card.Title>{character.name}</Card.Title>

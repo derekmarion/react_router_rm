@@ -27,7 +27,7 @@ const CharacterDetailsPage = () => {
         <>
         {character ? (
         <div className="container text-center" style={{ marginTop: '70px' }}>
-            <Card style={{ width: '18rem'}} className="mx-auto">
+            <Card style={{ width: '18rem'}} className="mx-auto char-card">
                 <Card.Img variant="top" src={character.image} />
                 <Card.Body>
                     <Card.Title>{character.name}</Card.Title>

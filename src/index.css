@@ -7,3 +7,13 @@
     background-color: green;
     color: white;
   }
+
+  .about {
+    border: solid 1px lightgrey;
+    background-color: #f6f3f0;
+    border-radius: 30px;
+  }
+
+  .char-card {
+    border: solid 5px lightgrey;
+  }

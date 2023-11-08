@@ -27,7 +27,7 @@ const Favorites = () => {
         <Row xs={1} md={2} lg={3} xl={4} className="g-4">
         {favorites.map(favorite => (
             <Col key={favorite.id}>
-            <Card style={{ width: '18rem'}}>
+            <Card style={{ width: '18rem'}} className="char-card">
                 <Card.Img variant="top" src={favorite.image} />
                 <Card.Body>
                     <Card.Title>{favorite.name}</Card.Title>
